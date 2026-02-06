@@ -1,0 +1,742 @@
+wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4
+unix | utf-8 | c   93%   31:11
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int)
+  __attribute__((noreturn))'; ISO C99 and later
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ p
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'error("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 #include <sys/wait.h>
+    4
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4  unix | utf-8 | c   93%   31:11
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 #include <sys/wait.h>
+    4
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4  unix | utf-8 | c   93%   31:11
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 #include <sys/wait.h>
+    4
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4  unix | utf-8 | c   93%   31:11
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 #include <sys/wait.h>
+    4
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4  unix | utf-8 | c   93%   31:11
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 #include <sys/wait.h>
+    4
+    5 int main(void){
+    6 ┆ pid_t pid = fork();
+    7 ┆ if (pid == -1) {
+    8 ┆ ┆ perror("fork");
+    9 ┆ ┆ return 1;
+   10 ┆ }
+   11 ┆
+   12 ┆ if (pid == 0) {
+   13 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);
+   14 ┆ ┆ perror("executable");
+E  15 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and lat
+   16 ┆ }
+   17 ┆ else {
+   18 ┆ ┆ int wstatus = 0 ;
+   19 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){
+   20 ┆ ┆ ┆ perror("waitpid");
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function decl
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean '
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                        E: 4  unix | utf-8 | c   93%   31:11
+   21 ┆ ┆ ┆ return 1;
+   22 ┆ ┆ }
+   23 ┆ ┆
+E  24 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support implicit function declar
+   25 ┆ ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));
+   26 ┆ ┆ } else if (WIFSIGNALED(wstatus)){
+E  27 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier 'wtatus'; did you mean 'ws
+   28 ┆ ┆ }
+   29 ┆ ┆
+   30 ┆ ┆
+   31 ┆ return 0;
+   32 ┆
+E  33 }     ■ expected '}'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ practice1.c +
+    1 #include <stdio.h>
+    2 #include <unistd.h>
+    3 # pid_t pid = fork();                                                                                    if (pid == -1) {                                                                                   7 ┆ ┆ perror("fork");                                                                                  8 ┆ ┆ return 1;                                                                                        9 ┆ }                                                                                                  0 ┆                                                                                                    1 ┆ if (pid == 0) {                                                                                    2 ┆ ┆ execlp("ls", "ls", "-a", "-l", NULL);                                                            3 ┆ ┆ perror("executable");                                                                            4 ┆ ┆ exit(1);     ■ call to undeclared library function 'exit' with type 'void (int) __attribute__((noret }                                                                                                  6 ┆ else {                                                                                             7 ┆ ┆ int wstatus = 0 ;                                                                                8 ┆ ┆ if(waitpid(pid, &wstatus, 0) == -1){                                                             9 ┆ ┆ ┆ perror("waitpid");                                                                             0 ┆ ┆ ┆ return 1;                                                                                      1 ┆ ┆ }                                                                                                2 ┆ ┆                                                                                                  3 ┆ ┆ if (WIFEXIT(wstatus)){     ■ call to undeclared function 'WIFEXIT'; ISO C99 and later do not support ┆ ┆ printf("childexit:%d\n", WEXITSTATUS(wstatus));                                                5 ┆ ┆ } else if (WIFSIGNALED(wstatus)){                                                                6 ┆ ┆ ┆ printf("child terminated by signal: %d\n", WTERMSIG(wtatus));     ■ use of undeclared identifier ' ┆ }                                                                                                8 ┆ ┆                                                                                                  9 ┆ ┆                                                                                                  0 ┆ return 0;                                                                                                                                                                                                 2 ┆       expected '}'                                                                                 3 }     ■
+~
+~
+~
+~
+~
+~
+~
+~
+~
+ NORMAL  practice1.c | +                                                                          E: 4  unix | utf-8 | c   93%   31:11
+ NORMAL  practice1.c | +                                          E: 4  unix | utf-8 | c   93%   31:11
+~❯ man exec
+~❯ ls
+cmpt201-coursework  log.c  practice  practice.c  start_here.sh  units
+~❯ nvim practice.c
+~❯ clang practice.c -o practive
+~❯ ./practive
+before execute
+cmpt201-coursework  log.c  practice  practice.c  practive  start_here.sh  units
+~❯ nvim practice.c
+~❯ ./practive
+before execute
+cmpt201-coursework  log.c  practice  practice.c  practive  start_here.sh  units
+~❯ clang practice.c -o practice
+~❯ ./practice
+before execute
+after execute
+cmpt201-coursework  log.c  practice  practice.c  practive  start_here.sh  units
+~❯ nvim practice.c
+~❯ nvim practice.c
+~❯ ls
+cmpt201-coursework  log.c  practice  practice.c  practive  start_here.sh  units
+~❯ rm practice.c practice practive
+~❯ ls
+cmpt201-coursework  log.c  start_here.sh  units
+ lab4.c
+    1 #include <errno.h>
+    2 #include <stdint.h>
+    3 #include <stdio.h>
+    4 #include <stdlib.h>
+    5 #include <string.h>
+    6 #include <unistd.h>
+    7
+    8 #define EXTRA_SIZE 256
+    9 #define BLOCK_SIZE 128
+   10 #define BUF_SIZE 256
+   11
+   12 struct header {
+   13 ┆ uint64_t size;
+   14 ┆ struct header *next;
+   15 };
+   16
+   17 static void handle_error(const char *msg) {
+   18 ┆ char buf[BUF_SIZE];
+   19 ┆ int len = snprintf(buf, BUF_SIZE, "ERROR: %s: %s\n", msg, strerror(errno));
+   20 ┆ if (len > 0) {
+   21 ┆ ┆ write(STDERR_FILENO, buf, (size_t)len);
+   22 ┆ }
+   23 ┆ exit(1);
+   24 }
+   25
+   26 static void print_out(char *format, void *data, size_t data_size) {
+   27 ┆ char buf[BUF_SIZE];
+   28 ┆ ssize_t len = snprintf(buf, BUF_SIZE, format,
+W  29 ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆  data_size == sizeof(uint64_t) ? *(uint64_t *)data     ■ pointer/integer
+   30 ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆ ┆  : *(void **)data);
+   31 ┆ if (len < 0) {
+   32 ┆ ┆ handle_error("snprintf");
+   33 ┆ }
+   34 ┆ if (write(STDOUT_FILENO, buf, (size_t)len) < 0) {
+   35 ┆ ┆ handle_error("write");
+   36 ┆ }
+   37 }
+   38
+   39 int main(void) {
+   40 ┆ errno = 0;
+E  41 ┆ void *base = sbrk(EXTRA_SIZE);     ■■ call to undeclared function 'sbrk'; ISO C99 and later do
+   42 ┆ if (base == (void *)-1) {
+ INSERT  lab4.c                                             W: 1  E: 2  unix | utf-8 | c    1%    1:1
+:q
+`#include <errno.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define EXTRA_SIZE 256
+#define BLOCK_SIZE 128
+#define BUF_SIZE 256
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+static void handle_error(const char *msg) {
+  char buf[BUF_SIZE];
+  int len = snprintf(buf, BUF_SIZE, "ERROR: %s: %s\n", msg, strerror(errno));
+  if (len > 0) {
+    write(STDERR_FILENO, buf, (size_t)len);
+  }
+  exit(1);
+}
+
+static void print_out(char *format, void *data, size_t data_size) {
+  char buf[BUF_SIZE];
+  ssize_t len = snprintf(buf, BUF_SIZE, format,
+                         data_size == sizeof(uint64_t) ? *(uint64_t *)data
+                                                       : *(void **)data);
+  if (len < 0) {
+    handle_error("snprintf");
+  }
+  if (write(STDOUT_FILENO, buf, (size_t)len) < 0) {
+    handle_error("write");
+  }
+}
+
+int main(void) {
+  errno = 0;
+  void *base = sbrk(EXTRA_SIZE);
+  if (base == (void *)-1) {
+    handle_error("sbrk");
+  }
+
+  void *block1 = base;
+  void *block2 = (void *)((char *)base + BLOCK_SIZE);
+
+  struct header *h1 = (struct header *)block1;
+  struct header *h2 = (struct header *)block2;
+
+  h1->size = BLOCK_SIZE;
+  h1->next = NULL;
+
+  h2->size = BLOCK_SIZE;
+  h2->next = h1;
+
+  size_t header_size = sizeof(struct header);
+  size_t data_size = BLOCK_SIZE - header_size;
+
+  unsigned char *data1 = (unsigned char *)block1 + header_size;
+  unsigned char *data2 = (unsigned char *)block2 + header_size;
+
+  for (size_t i = 0; i < data_size; i++) {
+    data1[i] = 0;
+    data2[i] = 1;
+  }
+
+  print_out("first block:       %p\n", &block1, sizeof(&block1));
+  print_out("second block:      %p\n", &block2, sizeof(&block2));
+
+  print_out("first block size:  %lu\n", &h1->size, sizeof(uint64_t));
+  print_out("first block next:  %p\n", &h1->next, sizeof(&h1->next));
+
+  print_out("second block size: %lu\n", &h2->size, sizeof(uint64_t));
+  print_out("second block next: %p\n", &h2->next, sizeof(&h2->next));
+
+  for (size_t i = 0; i < data_size; i++) {
+    uint64_t v = data1[i];
+    print_out("%lu\n", &v, sizeof(uint64_t));
+  }
+
+  for (size_t i = 0; i < data_size; i++) {
+    uint64_t v = data2[i];
+    print_out("%lu\n", &v, sizeof(uint64_t));
+  }
+
+  return 0;
+}

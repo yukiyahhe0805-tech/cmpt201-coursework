@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void) {
+  printf("started\n");
+  sleep(3);
+  printf("waited for 3 seconds\n");
+
+  return 0;
+}

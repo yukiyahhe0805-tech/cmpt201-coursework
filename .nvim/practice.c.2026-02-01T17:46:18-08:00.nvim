@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void) {
+  printf("started\n");
+  fflush(stdout);
+  sleep(3);
+  printf("waited for 3 seconds\n");
+  fflush(stdout);
+  return 0;
+}
