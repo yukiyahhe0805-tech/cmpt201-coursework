@@ -1,0 +1,15 @@
+#include <limits.h>
+#include <stdint.h>
+#include <stdio.h>
+
+int32_t absolute_value(int32_t num) {
+  if (num < 0)
+    return -num; // UB when num == INT32_MIN
+  return num;
+}
+
+int main(void) {
+  int32_t x = INT32_MIN;
+  printf("abs(%d) = %d\n", x, absolute_value(x));
+  return 0;
+}
